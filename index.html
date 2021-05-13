@@ -202,7 +202,7 @@
           var link = exportSVGLink = document.createElement('a');
           exportLink.href = scratchblocks.exportSVG(svg);
           exportLink.setAttribute('download', 'scratchblocks.svg');
-          exportLink.textContent = "Export SVG";
+          exportLink.textContent = "ดาวน์โหลดเป็น SVG";
           exportLink.className = 'export-link';
           var p = document.createElement('p');
           p.appendChild(exportLink);
@@ -238,7 +238,7 @@
       var link = exportSVGLink = document.createElement('a');
       link.href = docView3.exportSVG();
       link.setAttribute('download', 'scratchblocks.svg');
-      link.textContent = "Export SVG";
+      link.textContent = "ดาวน์โหลดเป็น SVG";
       link.className = 'export-link';
       document.body.appendChild(link);
 
@@ -247,7 +247,7 @@
         var link = exportPNGLink = document.createElement('a');
         link.href = pngDataURL;
         link.setAttribute('download', 'scratchblocks.png');
-        link.textContent = "Export PNG";
+        link.textContent = "ดาวน์โหลดเป็น PNGG";
         link.className = 'export-link';
         document.body.appendChild(link);
       }, 2);
