@@ -120,9 +120,6 @@
     if (/\†/.test(text)) newOnlyLangs.push(el.value);
   });
 
-  var langStatus = document.createTextNode("");
-  document.getElementById('lang-status').appendChild(langStatus);
-
   chooseLang.addEventListener('change', function (e) {
     obj.lang = chooseLang.value;
     console.log(obj);
