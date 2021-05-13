@@ -2,101 +2,101 @@ var SVG = require("./draw.js")
 
 var Style = (module.exports = {
   cssContent: `
-    .sb3-label {
+    .sb3bw-label {
       font: 500 12pt Helevetica Neue, Helvetica, sans-serif;
-      fill: #fff;
+      fill: #000000;
       word-spacing: +1pt;
     }
 
-    .sb3-motion { fill: #4c97ff; stroke: #3373cc; }
-    .sb3-motion-alt { fill: #4280d7; }
-    .sb3-motion-dark { fill: #4c97ff; }
-    .sb3-looks { fill: #9966ff; stroke: #774dcb; }
-    .sb3-looks-alt { fill: #855cd6; }
-    .sb3-looks-dark { fill: #bd42bd; }
-    .sb3-sound { fill: #cf63cf; stroke: #bd42bd; }
-    .sb3-sound-alt { fill: #c94fc9; }
-    .sb3-sound-dark { fill: #bd42bd; }
-    .sb3-control { fill: #ffab19; stroke: #cf8b17; }
-    .sb3-control-alt { fill: #ec9c13; }
-    .sb3-control-dark { fill: #cf8b17; }
-    .sb3-events { fill: #ffbf00; stroke: #cc9900; }
-    .sb3-events-alt { fill: #e6ac00; }
-    .sb3-events-dark { fill: #cc9900; }
-    .sb3-sensing { fill: #5cb1d6; stroke: #2e8eb8; }
-    .sb3-sensing-alt { fill: #47a8d1; }
-    .sb3-sensing-dark { fill: #2e8eb8; }
-    .sb3-operators { fill: #59c059; stroke: #389438; }
-    .sb3-operators-alt { fill: #46b946; }
-    .sb3-operators-dark { fill: #389438; }
-    .sb3-variables { fill: #ff8c1a; stroke: #db6e00; }
-    .sb3-variables-alt { fill: #ff8000; }
-    .sb3-variables-dark { fill: #db6e00; }
-    .sb3-list { fill: #ff661a; stroke: #e64d00; }
-    .sb3-list-alt { fill: #ff5500; }
-    .sb3-list-dark { fill: #e64d00; }
-    .sb3-custom { fill: #ff6680; stroke: #ff3355; }
-    .sb3-custom-alt { fill: #ff4d6a; }
-    .sb3-custom-dark { fill: #ff3355; }
-    .sb3-custom-arg { fill: #ff6680; stroke: #ff3355; }
+    .sb3bw-motion { fill: #ffffff; stroke: #000000; }
+    .sb3bw-motion-alt { fill: #ffffff; }
+    .sb3bw-motion-dark { fill: #ffffff; }
+    .sb3bw-looks { fill: #ffffff; stroke: #000000; }
+    .sb3bw-looks-alt { fill: #ffffff; }
+    .sb3bw-looks-dark { fill: #ffffff; }
+    .sb3bw-sound { fill: #ffffff; stroke: #000000; }
+    .sb3bw-sound-alt { fill: #ffffff; }
+    .sb3bw-sound-dark { fill: #ffffff; }
+    .sb3bw-control { fill: #ffffff; stroke: #000000; }
+    .sb3bw-control-alt { fill: #ffffff; }
+    .sb3bw-control-dark { fill: #ffffff; }
+    .sb3bw-events { fill: #ffffff; stroke: #000000; }
+    .sb3bw-events-alt { fill: #ffffff; }
+    .sb3bw-events-dark { fill: #ffffff; }
+    .sb3bw-sensing { fill: #ffffff; stroke: #000000; }
+    .sb3bw-sensing-alt { fill: #ffffff; }
+    .sb3bw-sensing-dark { fill: #ffffff; }
+    .sb3bw-operators { fill: #ffffff; stroke: #000000; }
+    .sb3bw-operators-alt { fill: #ffffff; }
+    .sb3bw-operators-dark { fill: #ffffff; }
+    .sb3bw-variables { fill: #ffffff; stroke: #000000; }
+    .sb3bw-variables-alt { fill: #ffffff; }
+    .sb3bw-variables-dark { fill: #ffffff; }
+    .sb3bw-list { fill: #ffffff; stroke: #000000; }
+    .sb3bw-list-alt { fill: #ffffff; }
+    .sb3bw-list-dark { fill: #ffffff; }
+    .sb3bw-custom { fill: #ffffff; stroke: #000000; }
+    .sb3bw-custom-alt { fill: #ffffff; }
+    .sb3bw-custom-dark { fill: #ffffff; }
+    .sb3bw-custom-arg { fill: #ffffff; stroke: #000000; }
 
     /* extension blocks, e.g. pen */
-    .sb3-extension { fill: #0fbd8c; stroke: #0b8e69; }
-    .sb3-extension-alt { fill: #0da57a; }
-    .sb3-extension-line { stroke: #0da57a; }
-    .sb3-extension-dark { fill: #0b8e69; }
+    .sb3bw-extension { fill: #ffffff; stroke: #000000; }
+    .sb3bw-extension-alt { fill: #ffffff; }
+    .sb3bw-extension-line { stroke: #000000; }
+    .sb3bw-extension-dark { fill: #ffffff; }
 
     /* obsolete colors: chosen by hand, indicates invalid blocks */ 
-    .sb3-obsolete { fill: #ed4242; stroke: #ca2b2b; }
-    .sb3-obsolete-alt { fill: #db3333; }
-    .sb3-obsolete-dark { fill: #ca2b2b; }
+    .sb3bw-obsolete { fill: #ffffff; stroke: #000000; }
+    .sb3bw-obsolete-alt { fill: #ffffff; }
+    .sb3bw-obsolete-dark { fill: #ffffff; }
 
     /* grey: special color from the Scratch 3.0 design mockups */
-    .sb3-grey { fill: #bfbfbf; stroke: #909090; }
-    .sb3-grey-alt { fill: #b2b2b2; }
-    .sb3-grey-dark { fill: #909090; }
+    .sb3bw-grey { fill: #ffffff; stroke: #000000; }
+    .sb3bw-grey-alt { fill: #ffffff; }
+    .sb3bw-grey-dark { fill: #ffffff; }
 
-    .sb3-input-color {
-      stroke: #fff;
+    .sb3bw-input-color {
+      stroke: #000000;
     }
 
-    .sb3-input-number,
-    .sb3-input-string {
-      fill: #fff;
+    .sb3bw-input-number,
+    .sb3bw-input-string {
+      fill: #ffffff;
     }
-    .sb3-literal-number,
-    .sb3-literal-string,
-    .sb3-literal-number-dropdown,
-    .sb3-literal-dropdown {
+    .sb3bw-literal-number,
+    .sb3bw-literal-string,
+    .sb3bw-literal-number-dropdown,
+    .sb3bw-literal-dropdown {
       word-spacing: 0;
     }
-    .sb3-literal-number,
-    .sb3-literal-string {
-      fill: #575e75;
+    .sb3bw-literal-number,
+    .sb3bw-literal-string {
+      fill: #ffffff;
     }
 
-    .sb3-comment {
-      fill: #ffffa5;
-      stroke: #d0d1d2;
+    .sb3bw-comment {
+      fill: #ffffff;
+      stroke: #000000;
       stroke-width: 1;
     }
-    .sb3-comment-line {
-      fill: #ffff80;
+    .sb3bw-comment-line {
+      fill: #ffffff;
     }
-    .sb3-comment-label {
+    .sb3bw-comment-label {
       font: 400 12pt Helevetica Neue, Helvetica, sans-serif;
-      fill: #000;
+      fill: #ffffff;
       word-spacing: 0;
     }
 
-    .sb3-diff {
+    .sb3bw-diff {
       fill: none;
-      stroke: #000;
+      stroke: #000000;
     }
-    .sb3-diff-ins {
+    .sb3bw-diff-ins {
       stroke-width: 2px;
     }
-    .sb3-diff-del {
+    .sb3bw-diff-del {
       stroke-width: 3px;
     }
   `.replace(/[ \n]+/, " "),
@@ -117,7 +117,7 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-greenFlag",
+          id: "sb3bw-greenFlag",
         }
       ),
 
@@ -136,7 +136,7 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-dropdownArrow",
+          id: "sb3bw-dropdownArrow",
           transform: "scale(0.944)",
         }
       ),
@@ -155,7 +155,7 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-turnRight",
+          id: "sb3bw-turnRight",
         }
       ),
 
@@ -173,20 +173,20 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-turnLeft",
+          id: "sb3bw-turnLeft",
         }
       ),
 
       SVG.el("path", {
         d: "M0 0L4 4L0 8Z",
         fill: "#111",
-        id: "sb3-addInput",
+        id: "sb3bw-addInput",
       }),
 
       SVG.el("path", {
         d: "M4 0L4 8L0 4Z",
         fill: "#111",
-        id: "sb3-delInput",
+        id: "sb3bw-delInput",
       }),
 
       SVG.setProps(
@@ -203,7 +203,7 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-loopArrow",
+          id: "sb3bw-loopArrow",
         }
       ),
 
@@ -222,7 +222,7 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-musicBlock",
+          id: "sb3bw-musicBlock",
           fill: "none",
         }
       ),
@@ -255,7 +255,7 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-penBlock",
+          id: "sb3bw-penBlock",
           stroke: "#575E75",
           fill: "none",
           "stroke-linejoin": "round",
@@ -295,7 +295,7 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-videoBlock",
+          id: "sb3bw-videoBlock",
           stroke: "#000",
           fill: "#FFF",
           "stroke-opacity": 0.15,
@@ -316,14 +316,14 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-ttsBlock",
+          id: "sb3bw-ttsBlock",
           stroke: "#000",
           "stroke-opacity": 0.15,
         }
       ),
 
       SVG.el("image", {
-        id: "sb3-translateBlock",
+        id: "sb3bw-translateBlock",
         width: "40px",
         height: "40px",
         href:
@@ -331,7 +331,7 @@ var Style = (module.exports = {
       }),
 
       SVG.el("image", {
-        id: "sb3-microbitBlock",
+        id: "sb3bw-microbitBlock",
         width: "40px",
         height: "40px",
         href:
@@ -534,7 +534,7 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-wedoBlock",
+          id: "sb3bw-wedoBlock",
           fill: "none",
         }
       ),
@@ -600,7 +600,7 @@ var Style = (module.exports = {
         ]),
         {
           transform: "translate(5.5 3.5)",
-          id: "sb3-ev3Block",
+          id: "sb3bw-ev3Block",
         }
       ),
 
@@ -660,7 +660,7 @@ var Style = (module.exports = {
           }),
         ]),
         {
-          id: "sb3-makeymakeyBlock",
+          id: "sb3bw-makeymakeyBlock",
           fill: "none",
         }
       ),

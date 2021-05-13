@@ -422,7 +422,7 @@ var SVG = (module.exports = {
       w,
       h,
       extend(props, {
-        class: "sb3-comment",
+        class: "sb3bw-comment",
       })
     )
   },
@@ -435,7 +435,7 @@ var SVG = (module.exports = {
         width,
         2,
         extend(props, {
-          class: "sb3-comment-line",
+          class: "sb3bw-comment-line",
         })
       )
     )
@@ -445,7 +445,7 @@ var SVG = (module.exports = {
     return SVG.path(
       extend(props, {
         path: ["M", 0, 0, "L", w, 0],
-        class: "sb3-diff sb3-diff-del",
+        class: "sb3bw-diff sb3bw-diff-del",
       })
     )
   },

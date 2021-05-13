@@ -15,7 +15,7 @@ const { defaultFont, commentFont, makeStyle, makeIcons } = require("./style.js")
 
 /* Label */
 
-var LabelView = function(label) {
+var LabelView = function (label) {
   Object.assign(this, label)
 
   this.el = null
@@ -25,12 +25,12 @@ var LabelView = function(label) {
 }
 LabelView.prototype.isLabel = true
 
-LabelView.prototype.draw = function() {
+LabelView.prototype.draw = function () {
   return this.el
 }
 
 Object.defineProperty(LabelView.prototype, "width", {
-  get: function() {
+  get: function () {
     return this.metrics.width
   },
 })
@@ -38,11 +38,11 @@ Object.defineProperty(LabelView.prototype, "width", {
 LabelView.metricsCache = {}
 LabelView.toMeasure = []
 
-LabelView.prototype.measure = function() {
+LabelView.prototype.measure = function () {
   var value = this.value
-  var cls = "sb3-" + this.cls
+  var cls = "sb3bw-" + this.cls
   this.el = SVG.text(0, 13, value, {
-    class: "sb3-label " + cls,
+    class: "sb3bw-label " + cls,
   })
 
   var cache = LabelView.metricsCache[cls]
@@ -59,7 +59,7 @@ LabelView.prototype.measure = function() {
   }
 }
 
-LabelView.measure = function(value, font) {
+LabelView.measure = function (value, font) {
   var context = LabelView.measuring
   context.font = font
   var textMetrics = context.measureText(value)
@@ -69,7 +69,7 @@ LabelView.measure = function(value, font) {
 
 /* Icon */
 
-var IconView = function(icon) {
+var IconView = function (icon) {
   Object.assign(this, icon)
 
   const info = IconView.icons[this.name]
@@ -80,8 +80,8 @@ var IconView = function(icon) {
 }
 IconView.prototype.isIcon = true
 
-IconView.prototype.draw = function() {
-  return SVG.symbol("#sb3-" + this.name, {
+IconView.prototype.draw = function () {
+  return SVG.symbol("#sb3bw-" + this.name, {
     width: this.width,
     height: this.height,
   })
@@ -107,19 +107,19 @@ IconView.icons = {
 
 /* Line */
 
-var LineView = function() {
+var LineView = function () {
   this.width = 1
   this.height = 40
   this.x = 0
 }
 LineView.prototype.isLine = true
 
-LineView.prototype.measure = function() {}
+LineView.prototype.measure = function () { }
 
-LineView.prototype.draw = function(parent) {
+LineView.prototype.draw = function (parent) {
   var category = parent.info.category
   return SVG.el("line", {
-    class: "sb3-" + category + "-line",
+    class: "sb3bw-" + category + "-line",
     "stroke-linecap": "round",
     x1: 0,
     y1: 0,
@@ -130,7 +130,7 @@ LineView.prototype.draw = function(parent) {
 
 /* Input */
 
-var InputView = function(input) {
+var InputView = function (input) {
   Object.assign(this, input)
   if (input.label) {
     this.label = newView(input.label)
@@ -143,7 +143,7 @@ var InputView = function(input) {
 }
 InputView.prototype.isInput = true
 
-InputView.prototype.measure = function() {
+InputView.prototype.measure = function () {
   if (this.hasLabel) this.label.measure()
 }
 
@@ -159,7 +159,7 @@ InputView.shapes = {
   reporter: SVG.pillRect,
 }
 
-InputView.prototype.draw = function(parent) {
+InputView.prototype.draw = function (parent) {
   var labelX = 11
   if (this.isBoolean) {
     var w = 48
@@ -183,9 +183,9 @@ InputView.prototype.draw = function(parent) {
   var el = InputView.shapes[this.shape](w, h)
   SVG.setProps(el, {
     class: [
-      this.isColor ? "" : "sb3-" + parent.info.category,
-      "sb3-input",
-      "sb3-input-" + this.shape,
+      this.isColor ? "" : "sb3bw-" + parent.info.category,
+      "sb3bw-input",
+      "sb3bw-input-" + this.shape,
     ].join(" "),
   })
 
@@ -202,7 +202,7 @@ InputView.prototype.draw = function(parent) {
       })
     }
   } else if (this.shape === "number-dropdown") {
-    el.classList.add("sb3-" + parent.info.category + "-alt")
+    el.classList.add("sb3bw-" + parent.info.category + "-alt")
 
     // custom colors
     if (parent.info.color) {
@@ -212,8 +212,8 @@ InputView.prototype.draw = function(parent) {
       })
     }
   } else if (this.shape === "boolean") {
-    el.classList.remove("sb3-" + parent.info.category)
-    el.classList.add("sb3-" + parent.info.category + "-dark")
+    el.classList.remove("sb3bw-" + parent.info.category)
+    el.classList.add("sb3bw-" + parent.info.category + "-dark")
 
     // custom colors
     if (parent.info.color) {
@@ -229,7 +229,7 @@ InputView.prototype.draw = function(parent) {
   }
   if (this.hasArrow) {
     result.appendChild(
-      SVG.move(w - 24, 13, SVG.symbol("#sb3-dropdownArrow", {}))
+      SVG.move(w - 24, 13, SVG.symbol("#sb3bw-dropdownArrow", {}))
     )
   }
   return result
@@ -237,7 +237,7 @@ InputView.prototype.draw = function(parent) {
 
 /* Block */
 
-var BlockView = function(block) {
+var BlockView = function (block) {
   Object.assign(this, block)
   this.children = block.children.map(newView)
   this.comment = this.comment ? newView(this.comment) : null
@@ -283,7 +283,7 @@ var BlockView = function(block) {
 }
 BlockView.prototype.isBlock = true
 
-BlockView.prototype.measure = function() {
+BlockView.prototype.measure = function () {
   for (var i = 0; i < this.children.length; i++) {
     var child = this.children[i]
     if (child.measure) child.measure()
@@ -307,11 +307,11 @@ BlockView.shapes = {
   ring: SVG.pillRect,
 }
 
-BlockView.prototype.drawSelf = function(w, h, lines) {
+BlockView.prototype.drawSelf = function (w, h, lines) {
   // mouths
   if (lines.length > 1) {
     return SVG.mouthRect(w, h, this.isFinal, lines, {
-      class: ["sb3-" + this.info.category].join(" "),
+      class: ["sb3bw-" + this.info.category].join(" "),
     })
   }
 
@@ -319,8 +319,8 @@ BlockView.prototype.drawSelf = function(w, h, lines) {
   if (this.info.shape === "outline") {
     return SVG.setProps(SVG.stackRect(w, h), {
       class: [
-        "sb3-" + this.info.category,
-        "sb3-" + this.info.category + "-alt",
+        "sb3bw-" + this.info.category,
+        "sb3bw-" + this.info.category + "-alt",
       ].join(" "),
     })
   }
@@ -333,7 +333,7 @@ BlockView.prototype.drawSelf = function(w, h, lines) {
         ? "stack"
         : child.isInput ? child.shape : child.info.shape
       return SVG.roundRect(w, h, {
-        class: ["sb3-" + this.info.category].join(" "),
+        class: ["sb3bw-" + this.info.category].join(" "),
       })
     }
   }
@@ -343,7 +343,7 @@ BlockView.prototype.drawSelf = function(w, h, lines) {
     throw new Error("no shape func: " + this.info.shape)
   }
   return func(w, h, {
-    class: ["sb3-" + this.info.category].join(" "),
+    class: ["sb3bw-" + this.info.category].join(" "),
   })
 }
 
@@ -354,7 +354,7 @@ BlockView.padding = {
   null: [4, 4],
 }
 
-BlockView.prototype.horizontalPadding = function(child) {
+BlockView.prototype.horizontalPadding = function (child) {
   if (this.isRound) {
     if (child.isIcon) {
       return 16
@@ -385,7 +385,7 @@ BlockView.prototype.horizontalPadding = function(child) {
   return 8 // default: 2 units
 }
 
-BlockView.prototype.marginBetween = function(a, b) {
+BlockView.prototype.marginBetween = function (a, b) {
   // Consecutive labels should be rendered as a single text element.
   // For now, approximate the size of one space
   if (a.isLabel && b.isLabel) {
@@ -395,7 +395,7 @@ BlockView.prototype.marginBetween = function(a, b) {
   return 8 // default: 2 units
 }
 
-BlockView.prototype.draw = function() {
+BlockView.prototype.draw = function () {
   var isDefine = this.info.shape === "define-hat"
   var children = this.children
   var isCommand = this.isCommand
@@ -406,7 +406,7 @@ BlockView.prototype.draw = function() {
 
   var _this = this
   var y = this.info.shape === "cat" ? 16 : 0
-  var Line = function(y) {
+  var Line = function (y) {
     this.y = y
     this.width = 0
     this.height = isCommand ? 40 : 32
@@ -429,7 +429,7 @@ BlockView.prototype.draw = function() {
 
   if (this.info.isRTL) {
     var start = 0
-    var flip = function() {
+    var flip = function () {
       children = children
         .slice(0, start)
         .concat(children.slice(start, i).reverse())
@@ -588,7 +588,7 @@ BlockView.prototype.draw = function() {
 
 /* Comment */
 
-var CommentView = function(comment) {
+var CommentView = function (comment) {
   Object.assign(this, comment)
   this.label = newView(comment.label)
 
@@ -599,18 +599,18 @@ CommentView.prototype.isComment = true
 CommentView.lineLength = 12
 CommentView.prototype.height = 20
 
-CommentView.prototype.measure = function() {
+CommentView.prototype.measure = function () {
   this.label.measure()
 }
 
-CommentView.prototype.draw = function() {
+CommentView.prototype.draw = function () {
   var labelEl = this.label.draw()
 
   this.width = this.label.width + 16
   return SVG.group([
     SVG.commentLine(this.hasBlock ? CommentView.lineLength : 0, 6),
     SVG.commentRect(this.width, this.height, {
-      class: "sb3-comment",
+      class: "sb3bw-comment",
     }),
     SVG.move(8, 4, labelEl),
   ])
@@ -618,7 +618,7 @@ CommentView.prototype.draw = function() {
 
 /* Glow */
 
-var GlowView = function(glow) {
+var GlowView = function (glow) {
   Object.assign(this, glow)
   this.child = newView(glow.child)
 
@@ -628,11 +628,11 @@ var GlowView = function(glow) {
 }
 GlowView.prototype.isGlow = true
 
-GlowView.prototype.measure = function() {
+GlowView.prototype.measure = function () {
   this.child.measure()
 }
 
-GlowView.prototype.drawSelf = function() {
+GlowView.prototype.drawSelf = function () {
   var c = this.child
   var el
   var w = this.width
@@ -649,12 +649,12 @@ GlowView.prototype.drawSelf = function() {
     var el = c.drawSelf(w, h, [])
   }
   return SVG.setProps(el, {
-    class: "sb3-diff sb3-diff-ins",
+    class: "sb3bw-diff sb3bw-diff-ins",
   })
 }
 // TODO how can we always raise Glows above their parents?
 
-GlowView.prototype.draw = function() {
+GlowView.prototype.draw = function () {
   var c = this.child
   var el = c.isScript ? c.draw(true) : c.draw()
 
@@ -667,7 +667,7 @@ GlowView.prototype.draw = function() {
 
 /* Script */
 
-var ScriptView = function(script) {
+var ScriptView = function (script) {
   Object.assign(this, script)
   this.blocks = script.blocks.map(newView)
 
@@ -675,13 +675,13 @@ var ScriptView = function(script) {
 }
 ScriptView.prototype.isScript = true
 
-ScriptView.prototype.measure = function() {
+ScriptView.prototype.measure = function () {
   for (var i = 0; i < this.blocks.length; i++) {
     this.blocks[i].measure()
   }
 }
 
-ScriptView.prototype.draw = function(inside) {
+ScriptView.prototype.draw = function (inside) {
   var children = []
   var y = 1
   this.width = 0
@@ -724,7 +724,7 @@ ScriptView.prototype.draw = function(inside) {
 
 /* Document */
 
-var DocumentView = function(doc) {
+var DocumentView = function (doc) {
   Object.assign(this, doc)
   this.scripts = doc.scripts.map(newView)
 
@@ -734,13 +734,13 @@ var DocumentView = function(doc) {
   this.defs = null
 }
 
-DocumentView.prototype.measure = function() {
-  this.scripts.forEach(function(script) {
+DocumentView.prototype.measure = function () {
+  this.scripts.forEach(function (script) {
     script.measure()
   })
 }
 
-DocumentView.prototype.render = function(cb) {
+DocumentView.prototype.render = function (cb) {
   if (typeof ocbptions === "function") {
     throw new Error("render() no longer takes a callback")
   }
@@ -774,7 +774,7 @@ DocumentView.prototype.render = function(cb) {
 }
 
 /* Export SVG image as XML string */
-DocumentView.prototype.exportSVGString = function() {
+DocumentView.prototype.exportSVGString = function () {
   if (this.el == null) {
     throw new Error("call draw() first")
   }
@@ -787,12 +787,12 @@ DocumentView.prototype.exportSVGString = function() {
 }
 
 /* Export SVG image as data URI */
-DocumentView.prototype.exportSVG = function() {
+DocumentView.prototype.exportSVG = function () {
   var xml = this.exportSVGString()
   return "data:image/svg+xml;utf8," + xml.replace(/[#]/g, encodeURIComponent)
 }
 
-DocumentView.prototype.toCanvas = function(cb, scale) {
+DocumentView.prototype.toCanvas = function (cb, scale) {
   scale = scale || 1.0
 
   var canvas = SVG.makeCanvas()
@@ -802,7 +802,7 @@ DocumentView.prototype.toCanvas = function(cb, scale) {
 
   var image = new Image()
   image.src = this.exportSVG()
-  image.onload = function() {
+  image.onload = function () {
     context.save()
     context.scale(scale, scale)
     context.drawImage(image, 0, 0)
@@ -812,10 +812,10 @@ DocumentView.prototype.toCanvas = function(cb, scale) {
   }
 }
 
-DocumentView.prototype.exportPNG = function(cb, scale) {
-  this.toCanvas(function(canvas) {
+DocumentView.prototype.exportPNG = function (cb, scale) {
+  this.toCanvas(function (canvas) {
     if (URL && URL.createObjectURL && Blob && canvas.toBlob) {
-      var blob = canvas.toBlob(function(blob) {
+      var blob = canvas.toBlob(function (blob) {
         cb(URL.createObjectURL(blob))
       }, "image/png")
     } else {
