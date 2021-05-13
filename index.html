@@ -56,12 +56,12 @@
 </style>
 
 <!---------------------------------------------------------------------------->
-
+/
 <h1>
   <a id=title href="/">scratchblocks dev</a>
   <span>
-    <a target="_blank" href="http://wiki.scratch.mit.edu/wiki/Block_Plugin/Syntax">คู่มือการเขียนบล็อก</a>
-    <a href="http://github.com/blob8108/scratchblocks2">GitHub ของ ScratchBlocks</a>
+    <a target="_blank" href="http://wiki.scratch.mit.edu/wiki/Block_Plugin/Syntax">คู่มือการสร้างรูปบล็อกคำสั่ง</a>
+    <a href="http://github.com/blob8108/scratchblocks2">ดัดแปลงจากไลบรารี ScratchBlocks บน GitHub</a>
   </span>
 </h1>
 
@@ -69,10 +69,13 @@
   <div>
     เลือกภาษา:
     <select id="choose-lang">
-      <option value="">อังกฤษ (ค่าเริ่มต้น)
+      <option value="">อังกฤษ (ค่าเริ่มต้น)</option>
     </select>
-
-    <small id=lang-status></small>
+    เลือกหน้าตา:
+    <select id="choose-style">
+      <option value="scratch3">Scratch 3 แบบสี</option>
+      <option value="scratch3-bw">Scratch 3 แบบขาว-ดำ</option>
+    </select>
   </div>
 
   <textarea id="editor"></textarea>
@@ -95,10 +98,13 @@
 
   editor.addEventListener('input', function (e) {
     obj.script = editor.value;
+    obj.script = editor.value;
+    obj.script = editor.value;
     objUpdated();
   });
 
   var chooseLang = document.getElementById('choose-lang');
+  var chooseStyle = document.getElementById('choose-style');
 
   var languageCodes = Object.keys(scratchblocks.allLanguages)
   languageCodes.sort()
@@ -112,20 +118,18 @@
     chooseLang.appendChild(option)
   })
 
-  var incompleteLangs = [];
-  var newOnlyLangs = [];
-  [].slice.apply(chooseLang.options).forEach(function (el) {
-    var text = el.textContent;
-    if (/\*/.test(text)) incompleteLangs.push(el.value);
-    if (/\†/.test(text)) newOnlyLangs.push(el.value);
-  });
-
   chooseLang.addEventListener('change', function (e) {
     obj.lang = chooseLang.value;
+    obj.style = chooseStyle.value;
     console.log(obj);
     objUpdated();
   });
 
+  chooseStyle.addEventListener('change', function (e) {
+    obj.style = chooseStyle.value;
+    console.log(obj);
+    objUpdated();
+  });
 
   /* Extract hash from location. Returns true if changed */
   function extractHash() {
@@ -134,10 +138,11 @@
       newObj = {
         script: "",
         lang: obj.lang,
+        style: obj.style,
       };
     }
 
-    if (newObj.lang !== obj.lang || newObj.script !== obj.script) {
+    if (newObj.lang !== obj.lang || newObj.script !== obj.script || newObj.style !== obj.style) {
       obj = newObj;
       return true;
     }
@@ -160,7 +165,7 @@
         if (!match) return;
         var key = decodeURIComponent(match[1]);
         var value = decodeURIComponent(match[2]);
-        if (key === "lang" || key === "script") {
+        if (key === "lang" || key === "script" || key === "style") {
           newObj[key] = value;
         }
       });
@@ -172,7 +177,8 @@
     // set hash
     if (obj.lang) {
       location.hash = ('#?lang=' + encodeURIComponent(obj.lang) +
-        '&script=' + encodeURIComponent(obj.script));
+        '&script=' + encodeURIComponent(obj.script) +
+        '&style=' + encodeURIComponent(obj.style));
     } else if (obj.script) {
       location.hash = '#' + encodeURIComponent(obj.script);
     } else {
@@ -219,16 +225,11 @@
 
     console.log(scratchblocks.stringify(doc));
     var docView3 = scratchblocks.newView(doc, {
-      style: "scratch3-bw",
-    });
-    var docView2 = scratchblocks.newView(doc, {
-      style: "scratch3",
+      style: obj.style
     });
     var svg3 = docView3.render();
-    var svg2 = docView2.render();
     preview.innerHTML = "";
     preview.appendChild(svg3);
-    preview.appendChild(svg2);
 
     // add export link
     setTimeout(function () {
