@@ -673,6 +673,6 @@ var Style = (module.exports = {
     return style
   },
 
-  defaultFont: "500 12pt Helevetica Neue, Helvetica, sans-serif",
-  commentFont: "400 12pt Helevetica Neue, Helvetica, sans-serif",
+  defaultFont: "500 12pt Sarabun, Helevetica Neue, Helvetica, sans-serif",
+  commentFont: "400 12pt Sarabun, Helevetica Neue, Helvetica, sans-serif",
 })
