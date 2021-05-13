@@ -6,7 +6,7 @@
  * @license MIT
  * http://opensource.org/licenses/MIT
  */
-module.exports = function(window) {
+module.exports = function (window) {
   "use strict"
 
   var document = window.document
@@ -37,9 +37,13 @@ module.exports = function(window) {
   var scratch3 = require("./scratch3")
   scratch3.init(window)
 
+  var scratch3bw = require("./scratch3-bw")
+  scratch3bw.init(window)
+
   function appendStyles() {
     document.head.appendChild(scratch2.makeStyle())
     document.head.appendChild(scratch3.makeStyle())
+    document.head.appendChild(scratch3bw.makeStyle())
   }
 
   function parse(code, options) {
@@ -58,6 +62,8 @@ module.exports = function(window) {
         return scratch2.newView(doc)
       case "scratch3":
         return scratch3.newView(doc)
+      case "scratch3-bw":
+        return scratch3bw.newView(doc)
       default:
         throw new Error("Unknown style: " + options.style)
     }
@@ -123,7 +129,7 @@ module.exports = function(window) {
    *
    * Like the old 'scratchblocks2.parse().
    */
-  var renderMatching = function(selector, options) {
+  var renderMatching = function (selector, options) {
     var selector = selector || "pre.blocks"
     var options = Object.assign(
       {
@@ -141,7 +147,7 @@ module.exports = function(window) {
 
     // find elements
     var results = [].slice.apply(document.querySelectorAll(selector))
-    results.forEach(function(el) {
+    results.forEach(function (el) {
       var code = options.read(el, options)
 
       var doc = options.parse(code, options)
@@ -156,7 +162,7 @@ module.exports = function(window) {
     allLanguages: allLanguages, // read-only
     loadLanguages: loadLanguages,
 
-    stringify: function(doc) {
+    stringify: function (doc) {
       return doc.stringify()
     },
 
