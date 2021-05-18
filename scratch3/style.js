@@ -3,7 +3,7 @@ var SVG = require("./draw.js")
 var Style = (module.exports = {
   cssContent: `
     .sb3-label {
-      font: 500 12pt Helevetica Neue, Helvetica, sans-serif;
+      font: 500 12pt Sarabun, Helevetica Neue, Helvetica, sans-serif;
       fill: #fff;
       word-spacing: +1pt;
     }
