@@ -241,7 +241,7 @@ button:active, button.pressed, .button:active, .button.pressed {
   }
 
   #preview {
-    top: 8em;
+    top: 12em;
     right: 55%;
   }
 
