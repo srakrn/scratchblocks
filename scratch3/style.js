@@ -84,7 +84,7 @@ var Style = (module.exports = {
       fill: #ffff80;
     }
     .sb3-comment-label {
-      font: 400 12pt Helevetica Neue, Helvetica, sans-serif;
+      font: 400 12pt Sarabun, Helevetica Neue, Helvetica, sans-serif;
       fill: #000;
       word-spacing: 0;
     }
